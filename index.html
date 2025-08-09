@@ -1,46 +1,84 @@
+
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jaesung Ahn — Research</title>
-<meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jaesung Ahn — Research</title>
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* === Layout: fixed left sidebar, content on the right === */
+    html,body{height:100%}
+    body{margin:0;display:grid;grid-template-columns:260px minmax(0,1fr);gap:0}
+    .sidebar{position:sticky;top:0;height:100dvh;display:flex;flex-direction:column;justify-content:space-between;padding:20px 16px;border-right:1px solid var(--border,rgba(0,0,0,.1));background:var(--surface,transparent)}
+    .brand a{font-weight:700;text-decoration:none}
+    .side-cats{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .side-cats .cat{display:block;padding:10px 14px;border-radius:999px;text-decoration:none;border:1px solid var(--border,rgba(0,0,0,.1));background:var(--surface,rgba(255,255,255,.04));transition:transform .15s ease,background .2s ease,border-color .2s ease}
+    .side-cats .cat:hover{transform:translateX(4px)}
+    .side-cats .cat.active{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08)}
+    .side-footer{display:flex;align-items:center;gap:8px}
+    .content{min-height:100dvh;overflow-x:hidden}
+
+    /* === Hero: two columns inside content === */
+    .hero-wrap.two-col{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
+    .hero-left{display:flex;flex-direction:column;gap:16px}
+    .hero-right{position:relative;display:flex;align-items:center;justify-content:center}
+    .hero-right::before{content:"";position:absolute;inset:-20%;border-radius:50%;background: var(--hero-bg, conic-gradient(from 0deg,#6ee7ff,#718aff,#a07bff,#ff77e9,#ffd36e,#6ee7ff));filter:blur(80px);animation:hero-spin 25s linear infinite;opacity:.55;z-index:0}
+    .hero-right #headshot{position:relative;z-index:1;width:100%;max-width:560px;height:auto;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+    @keyframes hero-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+    /* === Responsive === */
+    @media (max-width:900px){
+      body{display:block}
+      .sidebar{position:sticky;top:0;height:auto;border-right:none;border-bottom:1px solid var(--border,rgba(0,0,0,.1));background:var(--surface,rgba(255,255,255,.02));z-index:10}
+      .side-cats{flex-direction:row;overflow-x:auto;padding-bottom:8px}
+      .content{padding-top:8px}
+      .hero-wrap.two-col{grid-template-columns:1fr;gap:24px}
+      .hero-right{order:-1}
+    }
+  </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-inner container">
-      <a href="#about" class="kicker">Jaesung Ahn</a>
-      <div class="links">
-        <a href="#publications">Publications</a>
-        <a href="#projects">Projects</a>
-        <a href="#interests">Interests</a>
-        <a href="#contact">Contact</a>
-      </div>
+  <!-- Left sidebar (OpenAI-like: Research / Safety …) -->
+  <aside class="sidebar">
+    <div>
+      <div class="brand"><a href="#about">Jaesung Ahn</a></div>
+      <nav class="side-cats" aria-label="Sections">
+        <a href="#publications" class="cat active" data-img="assets/hero-research.png" data-bg="conic-gradient(from 0deg,#6ee7ff,#718aff,#a07bff,#ff77e9,#ffd36e,#6ee7ff)">Research</a>
+        <a href="#projects" class="cat" data-img="assets/hero-safety.png" data-bg="conic-gradient(from 0deg,#2dd4bf,#34d399,#a7f3d0,#67e8f9,#2dd4bf)">Safety</a>
+        <a href="#interests" class="cat" data-img="assets/hero-courses.png">Courses</a>
+        <a href="#contact" class="cat" data-img="assets/hero-contact.png">Contact</a>
+      </nav>
+    </div>
+    <div class="side-footer">
       <button class="btn" onclick="__toggleTheme()" aria-label="Toggle theme">Theme</button>
     </div>
-  </nav>
+  </aside>
 
-  <header class="hero">
-    <div class="container hero-wrap">
-      <img id="headshot" src="assets/headshot-placeholder.png" alt="Headshot">
-      <div>
-        <div class="eyebrow">Profile</div>
-        <h1 class="display" id="name">Jaesung Ahn</h1>
-        <p class="pub-meta" id="titleloc">Graduate Student · Superconducting Qubits · Seoul</p>
-        <p class="lead" id="tagline">I do research on quantum information processing with superconducting qubits.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0">
-          <a id="cv" class="btn primary" href="#" target="_blank" rel="noreferrer">View CV</a>
-          <a id="email" class="btn ghost" href="mailto:yalgaeahn@kaist.ac.kr">Email me</a>
-          <span id="socials" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+  <!-- Right content -->
+  <main class="content">
+    <header class="hero">
+      <div class="container hero-wrap two-col">
+        <div class="hero-left">
+          <div class="eyebrow">Profile</div>
+          <h1 class="display" id="name">Jaesung Ahn</h1>
+          <p class="pub-meta" id="titleloc">Graduate Student · Superconducting Qubits · Seoul</p>
+          <p class="lead" id="tagline">I do research on quantum information processing with superconducting qubits.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0">
+            <a id="cv" class="btn primary" href="#" target="_blank" rel="noreferrer">View CV</a>
+            <a id="email" class="btn ghost" href="mailto:yalgaeahn@kaist.ac.kr">Email me</a>
+            <span id="socials" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+          </div>
+        </div>
+        <div class="hero-right">
+          <img id="headshot" src="assets/headshot-placeholder.png" alt="Headshot">
         </div>
       </div>
-    </div>
-    <div class="gradient-divider"></div>
-  </header>
+      <div class="gradient-divider"></div>
+    </header>
 
-  <main class="container">
-    <section id="publications" class="section">
+    <section id="publications" class="section container">
       <div class="eyebrow">Work</div>
       <h2 class="kicker">Publications</h2>
       <div class="controls">
@@ -67,28 +105,27 @@
       </div>
     </section>
 
-    <section id="projects" class="section">
+    <section id="projects" class="section container">
       <div class="eyebrow">Projects</div>
       <h2 class="kicker">Selected projects</h2>
       <div id="projects-wrap" class="grid grid-2"></div>
     </section>
 
-    <section id="interests" class="section">
+    <section id="interests" class="section container">
       <div class="eyebrow">Lab</div>
       <h2 class="kicker">Courses</h2>
       <div id="teaching-wrap" class="grid grid-2"></div>
     </section>
 
-    <section id="contact" class="section">
+    <section id="contact" class="section container">
       <div class="eyebrow">Contact</div>
       <h2 class="kicker">Get in touch</h2>
       <div class="card">
-        <p>For collaboration, talks, or reviews, email <a class="underline" id="email" href="mailto:yalgaeahn@kaist.ac.kr">yalgaeahn@kasit.ac.kr</a>.</p>
-    
+        <p>For collaboration, talks, or reviews, email <a class="underline" id="email" href="mailto:yalgaeahn@kaist.ac.kr">yalgaeahn@kaist.ac.kr</a>.</p>
       </div>
     </section>
 
-    <footer>
+    <footer class="container">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
         <div>© <span id="year"></span> <span id="eyebrow-name">Jaesung Ahn</span>. All rights reserved.</div>
         <p class="small pub-meta">SEE YOU SPACE COWBOY .</p>
@@ -103,6 +140,6 @@
     </footer>
   </main>
 
-<script src="site.js"></script>
+  <script src="site.js"></script>
 </body>
 </html>
