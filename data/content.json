@@ -1,0 +1,66 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "title": "Graduate Student \u00b7 Superconducting Qubits",
+    "location": "Seoul, South Korea",
+    "email": "you@example.com",
+    "tagline": "I build and characterize superconducting qubits\u2014microwave control, cryo experiments, and coherence.",
+    "headshot": "assets/headshot-placeholder.png",
+    "cv_url": "#"
+  },
+  "socials": [
+    {
+      "label": "Google Scholar",
+      "href": "#"
+    },
+    {
+      "label": "GitHub",
+      "href": "https://github.com/"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://linkedin.com/"
+    },
+    {
+      "label": "ORCID",
+      "href": "https://orcid.org/"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Microwave Calibration for High-Fidelity Fluxonium Gates",
+      "authors": [
+        "Your Name",
+        "Coauthor A"
+      ],
+      "venue": "APS March",
+      "year": 2025,
+      "type": "conference",
+      "link": "#",
+      "tags": [
+        "Fluxonium",
+        "Microwave"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Cryo Automation Toolkit",
+      "summary": "Automated cooldown checks, sweep orchestration, and report generation.",
+      "link": "#"
+    },
+    {
+      "title": "Qubit Noise Explorer",
+      "summary": "Measurement scripts + analysis for 1/f and TLS noise in transmons.",
+      "link": "#"
+    }
+  ],
+  "teaching": [
+    {
+      "course": "Quantum Hardware Lab",
+      "role": "TA",
+      "term": "Fall 2024",
+      "link": "#"
+    }
+  ]
+}

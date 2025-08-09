@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Name — Research</title>
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner container">
+      <a href="#about" class="kicker">Your Name</a>
+      <div class="links">
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="btn" onclick="__toggleTheme()" aria-label="Toggle theme">Theme</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-wrap">
+      <img id="headshot" src="assets/headshot-placeholder.png" alt="Headshot">
+      <div>
+        <div class="eyebrow">Profile</div>
+        <h1 class="display" id="name">Your Name</h1>
+        <p class="pub-meta" id="titleloc">Graduate Student · Superconducting Qubits · Seoul</p>
+        <p class="lead" id="tagline">I build and characterize superconducting qubits—microwave control, cryo experiments, and coherence.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0">
+          <a id="cv" class="btn primary" href="#" target="_blank" rel="noreferrer">View CV</a>
+          <a id="email" class="btn ghost" href="mailto:you@example.com">Email me</a>
+          <span id="socials" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+        </div>
+      </div>
+    </div>
+    <div class="gradient-divider"></div>
+  </header>
+
+  <main class="container">
+    <section id="publications" class="section">
+      <div class="eyebrow">Work</div>
+      <h2 class="kicker">Publications</h2>
+      <div class="controls">
+        <input id="q" placeholder="Search title, author, venue…">
+        <select id="type">
+          <option value="all">All</option>
+          <option value="journal">Journal</option>
+          <option value="conference">Conference</option>
+          <option value="preprint">Preprint</option>
+          <option value="workshop">Workshop</option>
+        </select>
+        <select id="sort">
+          <option value="desc">Newest</option>
+          <option value="asc">Oldest</option>
+        </select>
+      </div>
+      <div class="grid grid-2">
+        <div id="pub-list" class="card"></div>
+        <div class="card">
+          <h3 class="kicker">Publications per year</h3>
+          <div id="chart" style="margin-top:8px"></div>
+          <p class="small pub-meta">Data from <code>data/content.json</code></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="eyebrow">Projects</div>
+      <h2 class="kicker">Selected projects</h2>
+      <div id="projects-wrap" class="grid grid-2"></div>
+    </section>
+
+    <section id="teaching" class="section">
+      <div class="eyebrow">Teaching</div>
+      <h2 class="kicker">Courses</h2>
+      <div id="teaching-wrap" class="grid grid-2"></div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="eyebrow">Contact</div>
+      <h2 class="kicker">Get in touch</h2>
+      <div class="card">
+        <p>For collaboration, talks, or reviews, email <a class="underline" id="email" href="mailto:you@example.com">you@example.com</a>.</p>
+        <p class="small pub-meta">Add a privacy note and expected response time.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div>© <span id="year"></span> <span id="eyebrow-name">Your Name</span>. All rights reserved.</div>
+        <div style="display:flex;gap:12px">
+          <a class="underline" href="#about">About</a>
+          <a class="underline" href="#publications">Publications</a>
+          <a class="underline" href="#projects">Projects</a>
+          <a class="underline" href="#teaching">Teaching</a>
+          <a class="underline" href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+<script src="site.js"></script>
+</body>
+</html>
