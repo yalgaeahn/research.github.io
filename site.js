@@ -23,12 +23,31 @@
     el('#name').textContent=p.name;
     el('#eyebrow-name').textContent=p.name;
     el('#titleloc').textContent=`${p.title} · ${p.location}`;
-    el('#tagline').textContent=p.tagline;
+    el('#tagline').innerHTML=p.tagline;
+    const aff = p.affiliation || null;
+    const affEl = el('#affiliation');
+    if(affEl){
+      if(aff && (aff.name || aff.url)){
+        affEl.textContent = aff.name || aff.url || '';
+        if(aff.url) { affEl.href = aff.url; affEl.target = '_blank'; affEl.rel = 'noreferrer'; }
+        affEl.parentElement && (affEl.parentElement.style.display = 'block');
+      }else{
+        // hide the paragraph if no affiliation provided
+        affEl.parentElement && (affEl.parentElement.style.display = 'none');
+      }
+    }
     el('#email').href=`mailto:${p.email}`; el('#email').textContent=p.email;
     el('#cv').href=p.cv_url||'#';
     const img=el('#headshot'); if(img){ img.src=p.headshot; img.setAttribute('data-default-src', p.headshot); img.alt=p.name; }
     const s = el('#socials'); if(s){ s.innerHTML=''; (socials||[]).forEach(x=>{ const a=document.createElement('a'); a.className='btn'; a.href=x.href; a.target='_blank'; a.rel='noreferrer'; a.textContent=x.label; s.appendChild(a); }); }
     const y = el('#year'); if(y) y.textContent=String(new Date().getFullYear());
+
+    const seeBtn = el('#see-you');
+    if (seeBtn && p.personal_blog) {
+      seeBtn.addEventListener('click', () => {
+        window.open(p.personal_blog, '_blank', 'noopener');
+      });
+    }
   }
 
   const state={q:'',type:'all',sort:'desc'};

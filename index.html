@@ -7,6 +7,7 @@
   <meta name="color-scheme" content="light dark">
   <link rel="stylesheet" href="style.css">
   <style>
+    .btn.small {padding:4px 10px;font-size:0.85em}
     /* === Layout: fixed left sidebar, content on the right === */
     html,body{height:100%}
     body{margin:0;display:grid;grid-template-columns:260px minmax(0,1fr);gap:0}
@@ -18,12 +19,17 @@
     .side-cats .cat.active{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08)}
     .side-footer{display:flex;align-items:center;gap:8px}
     .content{min-height:100dvh;overflow-x:hidden}
+    html{scroll-behavior:smooth}
 
     /* === Hero: two columns inside content === */
     .hero-wrap.two-col{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
     .hero-left{display:flex;flex-direction:column;gap:16px}
     .hero-right{position:relative;display:flex;align-items:center;justify-content:center}
-    .hero-right::before{content:"";position:absolute;inset:-20%;border-radius:50%;background: var(--hero-bg, conic-gradient(from 0deg,#6ee7ff,#718aff,#a07bff,#ff77e9,#ffd36e,#6ee7ff));filter:blur(80px);animation:hero-spin 25s linear infinite;opacity:.55;z-index:0}
+    .hero-right::before{content:"";position:absolute;inset:-20%;border-radius:50%;background:
+      radial-gradient(50% 60% at 22% 28%, rgba(0,255,255,.55), transparent 60%),
+      radial-gradient(60% 50% at 68% 42%, rgba(0,235,255,.42), transparent 62%),
+      radial-gradient(42% 62% at 40% 70%, rgba(0,210,255,.35), transparent 64%);
+    filter:blur(80px);animation:aurora-shift 18s ease-in-out infinite alternate;opacity:.78;z-index:0}
     .hero-right #headshot{position:relative;z-index:1;width:100%;max-width:560px;height:auto;min-height:220px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
     @keyframes hero-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
@@ -36,6 +42,23 @@
       .hero-wrap.two-col{grid-template-columns:1fr;gap:24px}
       .hero-right{order:-1}
     }
+    .see-you-btn {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .see-you-btn:hover {
+      opacity: 1;
+      filter: drop-shadow(0 1px 0 rgba(0,0,0,.25));
+    }
+
   </style>
 </head>
 <body>
@@ -44,9 +67,9 @@
     <div>
       <div class="brand"><a href="#about">Jaesung Ahn</a></div>
       <nav class="side-cats" aria-label="Sections">
-        <a href="#publications" class="cat active" data-img="assets/hero-research.png" data-bg="conic-gradient(from 0deg,#6ee7ff,#718aff,#a07bff,#ff77e9,#ffd36e,#6ee7ff)">Research</a>
-        <a href="#projects" class="cat" data-img="assets/hero-safety.png" data-bg="conic-gradient(from 0deg,#2dd4bf,#34d399,#a7f3d0,#67e8f9,#2dd4bf)">Safety</a>
-        <a href="#interests" class="cat" data-img="assets/hero-courses.png">Courses</a>
+        <a href="#research" class="cat active" data-img="assets/hero-research.png">Research</a>
+        <a href="#publications" class="cat" data-img="assets/hero-publication.png">Publication</a>
+        <a href="#projects" class="cat" data-img="assets/hero-project.png">Project</a>
         <a href="#contact" class="cat" data-img="assets/hero-contact.png">Contact</a>
       </nav>
     </div>
@@ -65,17 +88,25 @@
           <p class="pub-meta" id="titleloc">Graduate Student · Superconducting Qubits · Seoul</p>
           <p class="lead" id="tagline">I do research on quantum information processing with superconducting qubits.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0">
-            <a id="cv" class="btn primary" href="#" target="_blank" rel="noreferrer">View CV</a>
-            <a id="email" class="btn ghost" href="mailto:yalgaeahn@kaist.ac.kr">Email me</a>
-            <span id="socials" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+            <a id="cv" class="btn primary small" href="#" target="_blank" rel="noreferrer">View CV</a>
+            <a id="email" class="btn ghost small" href="mailto:yalgaeahn@kaist.ac.kr">Email me</a>
+            <a id="orcid" class="btn ghost small" href="https://orcid.org/0009-0009-4338-1687" target="_blank" rel="noreferrer">ORCID</a>
+            <span id="socials" style="display:flex;gap:8px;flex-wrap:wrap" class="small"></span>
           </div>
         </div>
         <div class="hero-right">
-          <img id="headshot" src="assets/headshot-placeholder.png" alt="Headshot">
+          <img id="headshot" src="assets/hero-research.png" alt="Headshot">
         </div>
       </div>
       <div class="gradient-divider"></div>
     </header>
+
+    <section id="research" class="section container">
+      <div class="eyebrow">Research</div>
+      <h2 class="kicker">Research Interests</h2>
+      <p>Write here about your research focus, topics of interest, and goals...</p>
+     
+    
 
     <section id="publications" class="section container">
       <div class="eyebrow">Work</div>
@@ -110,11 +141,6 @@
       <div id="projects-wrap" class="grid grid-2"></div>
     </section>
 
-    <section id="interests" class="section container">
-      <div class="eyebrow">Lab</div>
-      <h2 class="kicker">Courses</h2>
-      <div id="teaching-wrap" class="grid grid-2"></div>
-    </section>
 
     <section id="contact" class="section container">
       <div class="eyebrow">Contact</div>
@@ -127,12 +153,12 @@
     <footer class="container">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
         <div>© <span id="year"></span> <span id="eyebrow-name">Jaesung Ahn</span>. All rights reserved.</div>
-        <p class="small pub-meta">SEE YOU SPACE COWBOY...</p>
+        <button id="see-you" class="see-you-btn" onclick="window.location.href='spacecowboy.html'">SEE YOU SPACE COWBOY...</button>
         <div style="display:flex;gap:12px">
           <a class="underline" href="#about">About</a>
           <a class="underline" href="#publications">Publications</a>
           <a class="underline" href="#projects">Projects</a>
-          <a class="underline" href="#interests">Interests</a>
+          <a class="underline" href="#research">Research</a>
           <a class="underline" href="#contact">Contact</a>
         </div>
       </div>

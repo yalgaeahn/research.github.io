@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jaesung Ahn - Research</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+    /* existing styles */
+    .see-you-btn {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .see-you-btn:hover {
+      opacity: 1;
+      filter: drop-shadow(0 1px 0 rgba(0,0,0,.25));
+    }
+    .center { min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; text-align: center; }
+    .center img { max-width: min(560px, 90vw); height: auto; }
+    .see-you-line { font-family: Georgia, "Times New Roman", Times, serif; font-style: italic; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  </style>
+</head>
+</head>
+<body>
+  <audio id="bgm" autoplay loop>
+    <source src="assets/Wo Qui Non Coin.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="center">
+    <img src="assets/ed.GIF" alt="Ed dancing" />
+    <div class="see-you-line">SEE YOU SPACE COWBOY...</div>
+  </main>
+
+  <script>
+    // Try to start playback in case the browser blocks passive autoplay
+    document.addEventListener('DOMContentLoaded', function(){
+      var a = document.getElementById('bgm');
+      if(a && a.paused){ a.play().catch(function(){ /* Autoplay might be blocked by the browser until user interaction. */ }); }
+    });
+  </script>
+</body>
+</html>

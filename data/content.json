@@ -4,9 +4,13 @@
     "title": "Graduate Student \u00b7 Superconducting Circuit \u00b7 Quantum Information",
     "location": "Daejeon, South Korea",
     "email": "yalgaeahn@kaist.ac.kr",
-    "tagline": "I do experiments with superconducting qubits to understand mesoscopic qunatum phenomena.",
+    "tagline": "Graduate researcher at <a href=\"https://sqnl.kaist.ac.kr/\" target=\"_blank\" rel=\"noreferrer\">Superconducting Quantum Nanoelectronics Lab (SQNL), KAIST</a>, studying superconducting qubits—device physics, high‑fidelity control, and noise characterization for scalable quantum information processing.",
     "headshot": "assets/headshot-placeholder.png",
-    "cv_url": "#"
+    "cv_url": "#",
+    "affiliation": {
+      "name": "Superconducting Quantum Nanoelectronics Lab (SQNL), KAIST",
+      "url": "https://sqnl.kaist.ac.kr/"
+    }
   },
   "socials": [
 
