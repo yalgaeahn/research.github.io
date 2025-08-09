@@ -20,10 +20,6 @@
     {
       "label": "LinkedIn",
       "href": "https://linkedin.com/"
-    },
-    {
-      "label": "ORCID",
-      "href": "https://orcid.org/"
     }
   ],
   "publications": [
@@ -51,7 +47,7 @@
     },
     {
       "title": "Qubit Noise Explorer",
-      "summary": "Measurement scripts + analysis for 1/f and TLS noise in transmons.",
+      "summary": "Scripts + analysis for 1/f and TLS noise in transmons.",
       "link": "#"
     }
   ],

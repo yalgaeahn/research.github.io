@@ -1,9 +1,6 @@
-# Research Website — OpenAI-style (Static, GitHub Pages)
+# Research Website — OpenAI-style (Cyan)
 
-Drop these files into your `username.github.io` repo and push.
+Drop these files into your `username.github.io` repo.
 
-- Edit `data/content.json` with your info
-- Replace `assets/headshot-placeholder.png`
-- Optional: add a `CNAME` file for a custom domain
+Accent colors sampled from your uploaded palette: `#1d7791` → `#b2fefe`.
 
-Last updated: 2025-08-09
