@@ -26,7 +26,7 @@
     el('#tagline').textContent=p.tagline;
     el('#email').href=`mailto:${p.email}`; el('#email').textContent=p.email;
     el('#cv').href=p.cv_url||'#';
-    const img=el('#headshot'); if(img){ img.src=p.headshot; img.alt=p.name; }
+    const img=el('#headshot'); if(img){ img.src=p.headshot; img.setAttribute('data-default-src', p.headshot); img.alt=p.name; }
     const s = el('#socials'); if(s){ s.innerHTML=''; (socials||[]).forEach(x=>{ const a=document.createElement('a'); a.className='btn'; a.href=x.href; a.target='_blank'; a.rel='noreferrer'; a.textContent=x.label; s.appendChild(a); }); }
     const y = el('#year'); if(y) y.textContent=String(new Date().getFullYear());
   }
@@ -77,19 +77,39 @@
       const right = document.querySelector('.hero-right');
       const img = document.getElementById('headshot');
       if(!cats.length || !right || !img) return;
-      function activate(a){
+
+      // keep original image as fallback
+      const defaultSrc = img.getAttribute('data-default-src') || img.getAttribute('data-default') || img.src;
+      const cache = new Map();
+      function preload(src){
+        return new Promise((resolve)=>{
+          if(!src){ resolve(false); return; }
+          if(cache.has(src)) { resolve(cache.get(src)); return; }
+          const im = new Image();
+          im.onload = ()=>{ cache.set(src,true); resolve(true); };
+          im.onerror = ()=>{ cache.set(src,false); resolve(false); };
+          im.src = src;
+        });
+      }
+
+      async function activate(a){
         cats.forEach(c=>c.classList.remove('active'));
         a.classList.add('active');
-        const newSrc = a.getAttribute('data-img');
-        const newBg  = a.getAttribute('data-bg');
-        if(newSrc) img.setAttribute('src', newSrc);
-        if(newBg)  right.style.setProperty('--hero-bg', newBg);
+        const nextBg = a.getAttribute('data-bg');
+        if(nextBg) right.style.setProperty('--hero-bg', nextBg);
+
+        const nextSrc = a.getAttribute('data-img');
+        if(!nextSrc){ img.src = defaultSrc; return; }
+        const ok = await preload(nextSrc);
+        img.src = ok ? nextSrc : defaultSrc;
       }
+
       cats.forEach(a=>{
         a.addEventListener('mouseenter', ()=>activate(a));
         a.addEventListener('focus', ()=>activate(a));
         a.addEventListener('click', e=>{ e.preventDefault(); activate(a); const href=a.getAttribute('href'); if(href && href.startsWith('#')){ const t=document.querySelector(href); if(t) t.scrollIntoView({behavior:'smooth'}); }});
       });
+
       const initial = document.querySelector('.side-cats .cat.active') || cats[0];
       if(initial) activate(initial);
     }

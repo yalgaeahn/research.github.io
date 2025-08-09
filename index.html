@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +24,7 @@
     .hero-left{display:flex;flex-direction:column;gap:16px}
     .hero-right{position:relative;display:flex;align-items:center;justify-content:center}
     .hero-right::before{content:"";position:absolute;inset:-20%;border-radius:50%;background: var(--hero-bg, conic-gradient(from 0deg,#6ee7ff,#718aff,#a07bff,#ff77e9,#ffd36e,#6ee7ff));filter:blur(80px);animation:hero-spin 25s linear infinite;opacity:.55;z-index:0}
-    .hero-right #headshot{position:relative;z-index:1;width:100%;max-width:560px;height:auto;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+    .hero-right #headshot{position:relative;z-index:1;width:100%;max-width:560px;height:auto;min-height:220px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
     @keyframes hero-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
     /* === Responsive === */
@@ -128,7 +127,7 @@
     <footer class="container">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
         <div>© <span id="year"></span> <span id="eyebrow-name">Jaesung Ahn</span>. All rights reserved.</div>
-        <p class="small pub-meta">SEE YOU SPACE COWBOY .</p>
+        <p class="small pub-meta">SEE YOU SPACE COWBOY...</p>
         <div style="display:flex;gap:12px">
           <a class="underline" href="#about">About</a>
           <a class="underline" href="#publications">Publications</a>
