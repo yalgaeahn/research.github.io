@@ -1,48 +1,45 @@
 {
   "profile": {
-    "name": "Your Name",
-    "title": "Graduate Student \u00b7 Superconducting Qubits",
-    "location": "Seoul, South Korea",
-    "email": "you@example.com",
-    "tagline": "I build and characterize superconducting qubits\u2014microwave control, cryo experiments, and coherence.",
+    "name": "Jaesung Ahn",
+    "title": "Graduate Student \u00b7 Superconducting Circuit \u00b7 Quantum Information",
+    "location": "Daejeon, South Korea",
+    "email": "yalgaeahn@kaist.ac.kr",
+    "tagline": "I do experiments with superconducting qubits to understand mesoscopic qunatum phenomena.",
     "headshot": "assets/headshot-placeholder.png",
     "cv_url": "#"
   },
   "socials": [
-    {
-      "label": "Google Scholar",
-      "href": "#"
-    },
+
     {
       "label": "GitHub",
-      "href": "https://github.com/"
+      "href": "https://github.com/yalgaeahn"
     },
     {
       "label": "LinkedIn",
-      "href": "https://linkedin.com/"
+      "href": "https://www.linkedin.com/in/jaesung-ahn/"
     }
   ],
   "publications": [
     {
-      "title": "Microwave Calibration for High-Fidelity Fluxonium Gates",
+      "title": "",
       "authors": [
-        "Your Name",
+        "Jaesung Ahn",
         "Coauthor A"
       ],
-      "venue": "APS March",
+      "venue": "",
       "year": 2025,
-      "type": "conference",
+      "type": "arxiv",
       "link": "#",
       "tags": [
-        "Fluxonium",
-        "Microwave"
+        "Transmon",
+        "Superconducting Qubit"
       ]
     }
   ],
   "projects": [
     {
-      "title": "Cryo Automation Toolkit",
-      "summary": "Automated cooldown checks, sweep orchestration, and report generation.",
+      "title": "High fidelity Entangling Gate Optimization",
+      "summary": "Investigating microwave-activate entangling gates on Transmon qubit.",
       "link": "#"
     },
     {
@@ -51,12 +48,12 @@
       "link": "#"
     }
   ],
-  "teaching": [
+  "interests": [
     {
-      "course": "Quantum Hardware Lab",
-      "role": "TA",
-      "term": "Fall 2024",
-      "link": "#"
+      "course": "Superconductung Quantum Nanoelectronics lab",
+      "role": "Graduate Student",
+      "term": "Feb 2025 ~",
+      "link": "https://sqnl.kaist.ac.kr/"
     }
   ]
 }
