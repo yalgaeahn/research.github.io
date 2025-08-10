@@ -1,5 +1,5 @@
 :root{--bg:#ffffff;--text:#000000;--muted:#5b5f62;--card:#f5f7f8;--border:#e8ebed;
---accent:#00fffb;--accent2:#a7ffff}
+--accent:#2fb7b5;--accent2:#a7ffff}
 :root.dark{--bg:#000000;--text:#f5f6f7;--muted:#b3bac0;--card:#101214;--border:#1b1e22}
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji}

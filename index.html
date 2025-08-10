@@ -33,15 +33,15 @@
     /* === Hero: two columns inside content === */
     .hero-wrap.two-col{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
     .hero-left{display:flex;flex-direction:column;gap:16px}
-    .hero-right{position:relative;display:flex;align-items:center;justify-content:center;--mx:.5;--my:.5;--spin:0deg;animation:quantum-drift 26s ease-in-out infinite alternate;isolation:isolate}
+    .hero-right{position:relative;display:flex;align-items:center;justify-content:center;--mx:.5;--my:.5;--spin:0deg;animation:quantum-drift 16s ease-in-out infinite alternate;isolation:isolate}
     .hero-right::before{
-      content:"";position:absolute;inset:-22%;border-radius:50%;
+      content:"";position:absolute;inset:-32%;border-radius:50%;
       background:
-        radial-gradient(60% 55% at calc(var(--mx)*100%) calc(var(--my)*100%), rgba(0,255,255,.35), transparent 65%),
-        radial-gradient(45% 60% at calc((1 - var(--mx))*100%) calc(var(--my)*100%), rgba(0,200,255,.28), transparent 68%),
-        radial-gradient(70% 70% at 50% 60%, rgba(0,170,255,.22), transparent 70%);
-      filter: blur(80px) saturate(140%);
-      animation: quantum-flow 10s ease-in-out infinite alternate, quantum-hue-cyan 28s ease-in-out infinite alternate;
+        radial-gradient(80% 75% at calc(var(--mx)*100%) calc(var(--my)*100%), rgba(0,255,255,.35), transparent 68%),
+        radial-gradient(70% 75% at calc((1 - var(--mx))*100%) calc(var(--my)*100%), rgba(0,200,255,.28), transparent 70%),
+        radial-gradient(70% 92% at 50% 60%, rgba(0,170,255,.22), transparent 72%);
+      filter: blur(120px) saturate(150%);
+      animation: quantum-flow 15s ease-in-out infinite alternate;
       opacity:.85;z-index:0;will-change: transform, filter;
       pointer-events:none;
     }
@@ -50,10 +50,10 @@
 
     /* Extra glow layer and dynamic keyframes */
     .hero-right::after{
-      content:"";position:absolute;inset:-18%;border-radius:50%;
+      content:"";position:absolute;inset:-28%;border-radius:50%;
       background: conic-gradient(from var(--spin), rgba(0,255,255,.24), transparent 55%, rgba(0,200,255,.18), transparent 85%);
-      mix-blend-mode: screen;animation: quantum-orbit 16s linear infinite;
-      filter: blur(50px);opacity:.6;z-index:0;pointer-events:none
+      mix-blend-mode: normal;animation: quantum-orbit 16s linear infinite;
+      filter: blur(80px);opacity:.6;z-index:0;pointer-events:none
     }
 
     @property --spin {
@@ -82,7 +82,7 @@
       100% { filter: hue-rotate(170deg) blur(80px) saturate(140%); }
     }
     @keyframes quantum-orbit { from { --spin: 0deg; } to { --spin: 360deg; } }
-    @keyframes quantum-hue   { 0% { filter: hue-rotate(0deg) blur(80px) saturate(140%);} 100% { filter: hue-rotate(360deg) blur(80px) saturate(140%);} }
+    @keyframes quantum-hue   { 10% { filter: hue-rotate(0deg) blur(80px) saturate(140%);} 100% { filter: hue-rotate(360deg) blur(80px) saturate(140%);} }
 
     @media (prefers-reduced-motion: reduce){
       .hero-right::before, .hero-right::after{ animation:none !important }
