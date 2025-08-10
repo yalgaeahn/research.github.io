@@ -5,18 +5,27 @@
 html,body{margin:0;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji}
 body{background:var(--bg);color:var(--text);line-height:1.6}
 .container{max-width:1100px;margin:0 auto;padding:24px}
-.nav{position:sticky;top:0;border-bottom:1px solid var(--border);backdrop-filter:saturate(180%) blur(10px);
-background:color-mix(in srgb, var(--bg), transparent 12%);z-index:30}
+.nav{position:sticky;top:0;border-bottom:none;backdrop-filter:saturate(180%) blur(10px);
+background:color-mix(in srgb, var(--bg), transparent 12%);z-index:30;grid-column:1 / -1}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px}
 .nav .links a{margin:0 10px;color:var(--text);text-decoration:none;opacity:.85}
 .nav .links a:visited{color:var(--text)}
-.hero{padding:64px 0 32px;border-bottom:1px solid var(--border);}
+.hero{padding:64px 0 32px}
 .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 h1.display{font-size:48px;line-height:1.1;letter-spacing:-0.02em;margin:10px 0 12px}
 p.lead{font-size:18px;color:var(--muted);max-width:780px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text);text-decoration:none}
-.btn.primary{border:none;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white}
-.btn.ghost{background:transparent}
+.btn{padding:0;border:none;background:transparent;color:inherit;text-decoration:none}
+.btn:hover{text-decoration:underline}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn.primary{color:var(--accent)}
+.btn.ghost{opacity:.9}
+.btn.small{font-size:.9em}
+/* Icon-only social buttons */
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:999px;text-decoration:none}
+.icon-btn:hover{background:var(--card)}
+.icon-btn img,.icon-btn svg{width:18px;height:18px;display:block}
+.icon-btn svg{fill:currentColor;stroke:currentColor}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .grid{display:grid;gap:20px}
 .grid-2{grid-template-columns:1.2fr .8fr}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
@@ -29,7 +38,7 @@ input,select{padding:10px 12px;border:1px solid var(--border);border-radius:12px
 .pub-meta{font-size:14px;color:var(--muted)}
 .badge{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--border);font-size:12px;margin-right:6px}
 .kicker{font-weight:600}
-footer{padding:28px 0;border-top:1px solid var(--border);margin-top:24px;color:var(--muted);font-size:14px}
+footer{padding:28px 0;margin-top:24px;color:var(--muted);font-size:14px}
 .hero-wrap{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:center}
 .hero img{width:200px;height:200px;border-radius:24px;object-fit:cover;border:1px solid var(--border)}
 @media (max-width:900px){ .grid-2{grid-template-columns:1fr} .hero-wrap{grid-template-columns:1fr} h1.display{font-size:36px} }

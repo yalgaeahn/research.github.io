@@ -1,11 +1,18 @@
-// site.js — OpenAI‑style layout without head/body injection
-
 (function(){
   const root=document.documentElement;
   const saved=localStorage.getItem('theme');
   const prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   if(saved){ if(saved==='dark') root.classList.add('dark'); } else if(prefersDark){ root.classList.add('dark'); }
   window.__toggleTheme=()=>{ root.classList.toggle('dark'); localStorage.setItem('theme', root.classList.contains('dark')?'dark':'light'); };
+
+  // sidebar collapse toggle (persisted)
+  if(localStorage.getItem('sidebar')==='collapsed'){
+    document.body.classList.add('sidebar-collapsed');
+  }
+  window.__toggleSidebar = ()=>{
+    const collapsed = document.body.classList.toggle('sidebar-collapsed');
+    localStorage.setItem('sidebar', collapsed ? 'collapsed' : 'expanded');
+  };
 
   fetch('data/content.json').then(r=>r.json()).then(d=>{
     renderProfile(d.profile, d.socials);
@@ -16,6 +23,63 @@
   });
 
   function el(s){return document.querySelector(s);} 
+
+  // --- inline SVG icon helper so icons follow currentColor and work in dark mode ---
+  async function inlineIcon(anchorEl, key, label){
+    // prevent double-insert if already inlined or in progress
+    if (anchorEl?.dataset?.iconLoaded === '1' || anchorEl?.dataset?.iconPending === '1') {
+      return true;
+    }
+    if (anchorEl && anchorEl.dataset) anchorEl.dataset.iconPending = '1';
+    try{
+      const res = await fetch(`assets/icons/${key}.svg`);
+      if(!res.ok) throw new Error('missing svg');
+      let svg = await res.text();
+      // strip hard-coded fills/strokes so CSS can colorize with currentColor
+      svg = svg.replace(/\sfill="[^"]*"/gi, '')
+               .replace(/\sstroke="[^"]*"/gi, '');
+      // Ensure pending flag is set (keep as is)
+      if (anchorEl && anchorEl.dataset) anchorEl.dataset.iconPending = '1';
+      anchorEl.insertAdjacentHTML('afterbegin', svg);
+      const s = anchorEl.querySelector('svg');
+      if(s){
+        s.setAttribute('width','18');
+        s.setAttribute('height','18');
+        s.setAttribute('aria-hidden','true');
+        s.setAttribute('focusable','false');
+      }
+      if(!anchorEl.querySelector('.sr-only')){
+        const sr=document.createElement('span');
+        sr.className='sr-only'; sr.textContent=label||key; anchorEl.appendChild(sr);
+      }
+      anchorEl.classList.add('icon-btn');
+      // Mark as loaded and clear pending
+      if(anchorEl && anchorEl.dataset){
+        anchorEl.dataset.iconLoaded = '1';
+        delete anchorEl.dataset.iconPending;
+      }
+      return true;
+    }catch(e){
+      // Clear pending flag so callers can retry
+      if(anchorEl && anchorEl.dataset){ delete anchorEl.dataset.iconPending; }
+      return false;
+    }
+  }
+
+  function upgradeStaticIcons(){
+    document.querySelectorAll('a[data-icon]').forEach(a=>{
+      const key=(a.getAttribute('data-icon')||'').toLowerCase();
+      const label=a.getAttribute('aria-label')||key;
+      inlineIcon(a, key, label).then(ok=>{
+        if(!ok){
+          // fallback to text if svg not found
+          if(!a.textContent.trim()) a.textContent = label.toUpperCase();
+          a.classList.remove('icon-btn');
+          a.classList.add('btn','small');
+        }
+      });
+    });
+  }
 
   // Note: we no longer inject a #hero or <style> — index.html owns the hero markup & CSS.
   function renderProfile(p, socials){
@@ -36,10 +100,49 @@
         affEl.parentElement && (affEl.parentElement.style.display = 'none');
       }
     }
-    el('#email').href=`mailto:${p.email}`; el('#email').textContent=p.email;
+    const emailLink = el('#email-link');
+    if(emailLink){ emailLink.href = `mailto:${p.email}`; emailLink.textContent = p.email; }
+    const emailIcon = el('#email-icon');
+    if(emailIcon){
+      emailIcon.href = `mailto:${p.email}`;
+      emailIcon.setAttribute('aria-label', p.email);
+      if (
+        !emailIcon.querySelector('svg') &&
+        emailIcon.dataset.iconLoaded !== '1' &&
+        emailIcon.dataset.iconPending !== '1'
+      ) {
+        inlineIcon(emailIcon, 'mail', 'Email');
+      }
+    }
     el('#cv').href=p.cv_url||'#';
-    const img=el('#headshot'); if(img){ img.src=p.headshot; img.setAttribute('data-default-src', p.headshot); img.alt=p.name; }
-    const s = el('#socials'); if(s){ s.innerHTML=''; (socials||[]).forEach(x=>{ const a=document.createElement('a'); a.className='btn'; a.href=x.href; a.target='_blank'; a.rel='noreferrer'; a.textContent=x.label; s.appendChild(a); }); }
+    const img=el('#headshot'); if(img){ img.src='assets/Me.png'; img.setAttribute('data-default-src','assets/Me.png'); img.alt=p.name; }
+    const s = el('#socials');
+    if(s){
+      s.innerHTML='';
+      const ICON_MAP = { orcid:'orcid', github:'github', gitHub:'github', linkedin:'linkedin', linkedIn:'linkedin' };
+      (socials||[]).forEach(x=>{
+        const a=document.createElement('a');
+        a.href=x.href; a.target='_blank'; a.rel='noreferrer';
+        a.setAttribute('aria-label', x.label || 'social');
+        // try to infer icon key from provided x.icon, label, or href
+        const label=(x.icon||x.label||'').toLowerCase();
+        let key = ICON_MAP[label];
+        if(!key && x.href){
+          if(/orcid\.org/i.test(x.href)) key='orcid';
+          else if(/github\.com/i.test(x.href)) key='github';
+          else if(/linkedin\.com/i.test(x.href)) key='linkedin';
+        }
+        if(key){
+          a.className='icon-btn';
+          inlineIcon(a, key, x.label||key).then(ok=>{
+            if(!ok){ a.className='btn small'; a.textContent=x.label||key; }
+          });
+        }else{
+          a.className='btn small'; a.textContent=x.label||x.href;
+        }
+        s.appendChild(a);
+      });
+    }
     const y = el('#year'); if(y) y.textContent=String(new Date().getFullYear());
 
     const seeBtn = el('#see-you');
@@ -116,11 +219,8 @@
         a.classList.add('active');
         const nextBg = a.getAttribute('data-bg');
         if(nextBg) right.style.setProperty('--hero-bg', nextBg);
-
-        const nextSrc = a.getAttribute('data-img');
-        if(!nextSrc){ img.src = defaultSrc; return; }
-        const ok = await preload(nextSrc);
-        img.src = ok ? nextSrc : defaultSrc;
+        // lock headshot to a fixed image regardless of category
+        if(img) img.src = 'assets/Me.png';
       }
 
       cats.forEach(a=>{
@@ -135,4 +235,6 @@
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', setup); else setup();
   })();
   // --- end ---
+  // --- end reactive quantum glow ---
+  upgradeStaticIcons();
 })();
