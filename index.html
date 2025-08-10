@@ -33,7 +33,7 @@
     /* === Hero: two columns inside content === */
     .hero-wrap.two-col{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center}
     .hero-left{display:flex;flex-direction:column;gap:16px}
-    .hero-right{position:relative;display:flex;align-items:center;justify-content:center;--mx:.5;--my:.5;--spin:0deg;animation:quantum-drift 26s ease-in-out infinite alternate}
+    .hero-right{position:relative;display:flex;align-items:center;justify-content:center;--mx:.5;--my:.5;--spin:0deg;animation:quantum-drift 26s ease-in-out infinite alternate;isolation:isolate}
     .hero-right::before{
       content:"";position:absolute;inset:-22%;border-radius:50%;
       background:
@@ -42,7 +42,8 @@
         radial-gradient(70% 70% at 50% 60%, rgba(0,170,255,.22), transparent 70%);
       filter: blur(80px) saturate(140%);
       animation: quantum-flow 10s ease-in-out infinite alternate, quantum-hue-cyan 28s ease-in-out infinite alternate;
-      opacity:.85;z-index:0;will-change: transform, filter
+      opacity:.85;z-index:0;will-change: transform, filter;
+      pointer-events:none;
     }
     .hero-right #headshot{position:relative;z-index:1;width:100%;max-width:560px;height:auto;min-height:220px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
     @keyframes hero-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
@@ -172,7 +173,7 @@
       <h2 class="kicker">Research Interests</h2>
       <p>Write here about your research focus, topics of interest, and goals...</p>
      
-    
+    </section>
 
     <section id="publications" class="section container">
       <div class="eyebrow">Work</div>
